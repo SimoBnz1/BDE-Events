@@ -25,6 +25,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/admin/events/{event}/edit', [EventController::class, 'edit'])
             ->name('events.edit');
 
+        Route::put('/admin/events/{event}', [EventController::class, 'update'])
+            ->name('events.update');
+
     });
 
 
