@@ -13,8 +13,11 @@ class ReservationController extends Controller
 {
     public function index()
     {
-        $reservation = Reservation::with('user');
-        return view('reservation.index', compact('reservation'));
+        $reservations = Reservation::with('event')
+            ->where('user_id', Auth::id())
+            ->latest()
+            ->get();
+        return view('student.Reservations.Reser', compact('reservations'));
     }
 
     public function store(Request $request, Event $event)
@@ -37,14 +40,22 @@ class ReservationController extends Controller
             'event_id' => $event->id,
             'status' => 'confirmed'
         ]);
-        
+
 
         Ticket::create([
             'reservation_id' => $reservation->id,
             'ticket_code' => 'TICK-' . strtoupper(Str::random(8)),
             'is_used' => false,
         ]);
-        return back()->with("messg","reservation effucter avec succes");
+        return back()->with("messg", "reservation effucter avec succes");
+    }
+
+    public function showTicket(Reservation $reservation)
+    {
+
+        $reservation->load('event', 'ticket', 'user');
+
+        return view('student.ticket', compact('reservation'));
     }
 
     public function destroy(Reservation $reservation)

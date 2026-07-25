@@ -42,9 +42,15 @@ class HomeController extends Controller
             )
         );
     }
-    
 
-    public function events()
+
+    public function eventsAdmin()
+    {
+        $events = Event::latest()->get();
+
+        return view('admin.components.events-table', compact('events'));
+    }
+    public function eventsStudent()
     {
         $events = Event::latest()->get();
 

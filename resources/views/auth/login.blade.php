@@ -124,7 +124,7 @@
 
                 <div class="text-center mb-6">
                     <div class="mx-auto w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-400 flex items-center justify-center shadow-md">
-                        <i data-lucide="log-in" class="w-7 h-7"></i>
+                        <a href="{{ route('index')}}"><i data-lucide="log-in" class="w-7 h-7"></i></a>
                     </div>
 
                     <h2 class="text-2xl font-bold mt-4">Login</h2>
