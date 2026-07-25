@@ -1,284 +1,225 @@
-<!DOCTYPE html>
-<html lang="fr" class="h-full bg-slate-50">
+@extends('layouts.app')
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Créer un nouvel événement | BDE-Events</title>
+@section('title', 'Créer un événement')
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              50: '#eff6ff',
-              100: '#dbeafe',
-              500: '#3b82f6',
-              600: '#2563eb',
-              700: '#1d4ed8',
-            }
-          }
-        }
-      }
-    }
-  </script>
+@section('content')
 
-  <!-- Inter Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<div class="max-w-4xl mx-auto py-6">
 
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-    }
-  </style>
-</head>
+    <div class="glass rounded-3xl overflow-hidden border border-white/10 shadow-neon">
 
-<body class="min-h-full py-10 px-4 sm:px-6 lg:px-8 bg-slate-50 text-slate-800 antialiased">
-
-  <!-- Container central -->
-  <div class="max-w-4xl mx-auto">
-
-    <!-- Card principale -->
-    <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xl shadow-slate-200/50 overflow-hidden transition-all duration-300">
-
-      <!-- En-tête de la Card -->
-      <div class="px-6 sm:px-10 pt-8 pb-6 border-b border-slate-100">
-        <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
-          Créer un nouvel événement
-        </h1>
-        <p class="mt-2 text-sm sm:text-base text-slate-500">
-          Complétez les informations ci-dessous pour publier un événement sur la plateforme BDE.
-        </p>
-      </div>
-
-      <!-- Formulaire -->
-      <form action="{{ route('AddEvents') }}" method="POST" class="px-6 sm:px-10 py-8 space-y-10">
-        @csrf
-
-        <!-- SECTION 1 : Informations générales -->
-        <div>
-          <div class="flex items-center gap-2 pb-3 mb-6 border-b border-slate-100">
-            <div class="p-2 bg-brand-50 rounded-lg text-brand-600">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
+        <div class="p-6 sm:p-8 border-b border-white/10 relative overflow-hidden flex items-center justify-between">
+            <div class="absolute -right-10 -top-10 w-40 h-40 bg-purple-500/10 rounded-full blur-2xl pointer-events-none"></div>
+            
             <div>
-              <h2 class="text-lg font-semibold text-slate-900">Informations générales</h2>
-              <p class="text-xs text-slate-500">Détails visibles par les étudiants</p>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-
-            <!-- Titre -->
-            <div class="sm:col-span-2">
-              <label for="title" class="flex items-center gap-2 text-sm font-medium text-slate-700 mb-2">
-                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
-                </svg>
-                Titre de l'événement <span class="text-red-500">*</span>
-              </label>
-              <input 
-                type="text" 
-                id="title" 
-                name="title" 
-                placeholder="ex: Soirée d'intégration 2026, Tournoi E-Sport..." 
-                class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-600/20 focus:border-brand-600 transition duration-200" 
-                required 
-              />
-            </div>
-
-            <!-- Catégorie -->
-            <div>
-              <label for="category" class="flex items-center gap-2 text-sm font-medium text-slate-700 mb-2">
-                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-                </svg>
-                Catégorie <span class="text-red-500">*</span>
-              </label>
-              <div class="relative">
-                <select 
-                  id="category" 
-                  name="category" 
-                  class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 text-sm appearance-none focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-600/20 focus:border-brand-600 transition duration-200 pr-10 cursor-pointer" 
-                  required
-                >
-                  <option value="" disabled selected>Sélectionner une catégorie</option>
-                  <option value="soiree">Soirée</option>
-                  <option value="sport">Sport</option>
-                  <option value="culture">Culture</option>
-                  <option value="workshop">Workshop</option>
-                  <option value="conference">Conférence</option>
-                </select>
-                <svg class="w-4 h-4 text-slate-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                </svg>
-              </div>
-            </div>
-
-            <!-- Date de l'événement -->
-            <div>
-              <label for="date_event" class="flex items-center gap-2 text-sm font-medium text-slate-700 mb-2">
-                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                Date & Heure <span class="text-red-500">*</span>
-              </label>
-              <input 
-                type="datetime-local" 
-                id="date_event" 
-                name="date_event" 
-                class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-600/20 focus:border-brand-600 transition duration-200" 
-                required 
-              />
-            </div>
-
-            <!-- Description -->
-            <div class="sm:col-span-2">
-              <label for="description" class="flex items-center gap-2 text-sm font-medium text-slate-700 mb-2">
-                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h11" />
-                </svg>
-                Description <span class="text-red-500">*</span>
-              </label>
-              <textarea 
-                id="description" 
-                name="description" 
-                rows="4" 
-                placeholder="Décrivez l'événement, le programme, les prérequis..." 
-                class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-600/20 focus:border-brand-600 transition duration-200 resize-none" 
-                required
-              ></textarea>
-              <p class="mt-1 text-xs text-slate-400">Rédigez une description claire et incitative pour les étudiants.</p>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- SECTION 2 : Organisation -->
-        <div>
-          <div class="flex items-center gap-2 pb-3 mb-6 border-b border-slate-100">
-            <div class="p-2 bg-brand-50 rounded-lg text-brand-600">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-            </div>
-            <div>
-              <h2 class="text-lg font-semibold text-slate-900">Organisation</h2>
-              <p class="text-xs text-slate-500">Lieu, capacité et tarification</p>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-
-            <!-- Lieu -->
-            <div class="sm:col-span-2">
-              <label for="location" class="flex items-center gap-2 text-sm font-medium text-slate-700 mb-2">
-                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
-                </svg>
-                Emplacement <span class="text-red-500">*</span>
-              </label>
-              <input 
-                type="text" 
-                id="location" 
-                name="location" 
-                placeholder="ex: Amphithéâtre A, Campus Central, Gymnase..." 
-                class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-600/20 focus:border-brand-600 transition duration-200" 
-                required 
-              />
-            </div>
-
-            <!-- Prix -->
-            <div>
-              <label for="price" class="flex items-center gap-2 text-sm font-medium text-slate-700 mb-2">
-                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Prix <span class="text-red-500">*</span>
-              </label>
-              <div class="relative">
-                <input 
-                  type="number" 
-                  id="price" 
-                  name="price" 
-                  min="0" 
-                  step="0.01" 
-                  placeholder="0" 
-                  class="w-full pl-4 pr-12 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-600/20 focus:border-brand-600 transition duration-200" 
-                  required 
-                />
-                <div class="absolute right-3.5 top-1/2 -translate-y-1/2 flex items-center pointer-events-none">
-                  <span class="text-xs font-semibold text-slate-400 bg-slate-100 px-2 py-1 rounded-md">DH</span>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 mb-3">
+                    <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+                    Nouveau contenu
                 </div>
-              </div>
-              <p class="mt-1.5 text-xs text-slate-400 flex items-center gap-1">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                0 = événement gratuit
-              </p>
+                <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight">
+                    Créer un <span class="gradient-text">événement</span>
+                </h1>
+                <p class="mt-1 text-sm text-gray-400">
+                    Complétez les informations ci-dessous pour publier un événement sur BDE Events.
+                </p>
             </div>
 
-            <!-- Capacité -->
+            <div class="hidden sm:flex w-12 h-12 rounded-2xl bg-white/5 border border-white/10 items-center justify-center text-cyan-400">
+                <i data-lucide="calendar-plus" class="w-6 h-6"></i>
+            </div>
+        </div>
+
+        <form action="{{ route('AddEvents') }}" method="POST" class="p-6 sm:p-8 space-y-8">
+            @csrf
+
+            <!-- SECTION 1 : Informations Générales -->
             <div>
-              <label for="capacity" class="flex items-center gap-2 text-sm font-medium text-slate-700 mb-2">
-                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-                Capacité d'accueil <span class="text-red-500">*</span>
-              </label>
-              <input 
-                type="number" 
-                id="capacity" 
-                name="capacity" 
-                min="1" 
-                placeholder="ex: 150" 
-                class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-600/20 focus:border-brand-600 transition duration-200" 
-                required 
-              />
-              <p class="mt-1.5 text-xs text-slate-400 flex items-center gap-1">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Nombre maximum de participants
-              </p>
+                <div class="flex items-center gap-3 pb-3 mb-6 border-b border-white/10">
+                    <div class="p-2 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+                        <i data-lucide="info" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base font-bold text-white">Informations générales</h2>
+                        <p class="text-xs text-gray-400">Détails principaux de l'événement</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+                    <!-- Titre -->
+                    <div class="sm:col-span-2">
+                        <label for="title" class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">
+                            Titre de l'événement <span class="text-cyan-400">*</span>
+                        </label>
+                        <div class="relative">
+                            <i data-lucide="type" class="w-4 h-4 text-gray-500 absolute left-4 top-1/2 -translate-y-1/2"></i>
+                            <input 
+                                type="text" 
+                                id="title" 
+                                name="title" 
+                                placeholder="ex: Soirée d'intégration, Tournoi E-Sport..." 
+                                class="w-full pl-11 pr-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all" 
+                                required 
+                            />
+                        </div>
+                    </div>
+
+                    <!-- Catégorie -->
+                    <div>
+                        <label for="category" class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">
+                            Catégorie <span class="text-cyan-400">*</span>
+                        </label>
+                        <div class="relative">
+                            <i data-lucide="tag" class="w-4 h-4 text-gray-500 absolute left-4 top-1/2 -translate-y-1/2 z-10"></i>
+                            <select 
+                                id="category" 
+                                name="category" 
+                                class="w-full pl-11 pr-10 py-3 rounded-xl bg-black/40 border border-white/10 text-white text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all appearance-none cursor-pointer" 
+                                required
+                            >
+                                <option value="" disabled selected class="bg-gray-900 text-gray-400">Sélectionner une catégorie</option>
+                                <option value="soiree" class="bg-gray-900 text-white">Soirée</option>
+                                <option value="sport" class="bg-gray-900 text-white">Sport</option>
+                                <option value="culture" class="bg-gray-900 text-white">Culture</option>
+                                <option value="workshop" class="bg-gray-900 text-white">Workshop</option>
+                                <option value="conference" class="bg-gray-900 text-white">Conférence</option>
+                            </select>
+                            <i data-lucide="chevron-down" class="w-4 h-4 text-gray-500 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                        </div>
+                    </div>
+
+                    <!-- Date & Heure -->
+                    <div>
+                        <label for="date_event" class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">
+                            Date & Heure <span class="text-cyan-400">*</span>
+                        </label>
+                        <div class="relative">
+                            <i data-lucide="calendar" class="w-4 h-4 text-gray-500 absolute left-4 top-1/2 -translate-y-1/2"></i>
+                            <input 
+                                type="datetime-local" 
+                                id="date_event" 
+                                name="date_event" 
+                                class="w-full pl-11 pr-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all [color-scheme:dark]" 
+                                required 
+                            />
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="sm:col-span-2">
+                        <label for="description" class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">
+                            Description <span class="text-cyan-400">*</span>
+                        </label>
+                        <textarea 
+                            id="description" 
+                            name="description" 
+                            rows="4" 
+                            placeholder="Décrivez l'événement, le programme, les détails importants..." 
+                            class="w-full p-4 rounded-xl bg-black/40 border border-white/10 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all resize-none" 
+                            required
+                        ></textarea>
+                    </div>
+
+                </div>
             </div>
 
-          </div>
-        </div>
+            <!-- SECTION 2 : Logistique -->
+            <div>
+                <div class="flex items-center gap-3 pb-3 mb-6 border-b border-white/10">
+                    <div class="p-2 rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/20">
+                        <i data-lucide="map-pin" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base font-bold text-white">Logistique & Tarification</h2>
+                        <p class="text-xs text-gray-400">Lieu, capacité d'accueil et tarif</p>
+                    </div>
+                </div>
 
-        <!-- Actions -->
-        <div class="pt-6 border-t border-slate-100 flex flex-col-reverse sm:flex-row items-center justify-end gap-3">
-          <button 
-            type="button" 
-            class="w-full sm:w-auto px-5 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 text-sm font-medium hover:bg-slate-50 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-200 transition duration-200 shadow-sm text-center"
-          >
-            Annuler
-          </button>
-          <button 
-            type="submit" 
-            class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 active:bg-brand-800 text-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-600/40 shadow-lg shadow-brand-600/25 hover:shadow-brand-600/35 transition duration-200 flex items-center justify-center gap-2"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            Publier l'événement
-          </button>
-        </div>
-        
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
 
-      </form>
+                    <!-- Lieu -->
+                    <div class="sm:col-span-2">
+                        <label for="location" class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">
+                            Emplacement <span class="text-cyan-400">*</span>
+                        </label>
+                        <div class="relative">
+                            <i data-lucide="building" class="w-4 h-4 text-gray-500 absolute left-4 top-1/2 -translate-y-1/2"></i>
+                            <input 
+                                type="text" 
+                                id="location" 
+                                name="location" 
+                                placeholder="ex: Amphithéâtre A, Hall Central..." 
+                                class="w-full pl-11 pr-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all" 
+                                required 
+                            />
+                        </div>
+                    </div>
+
+                    <!-- Prix -->
+                    <div>
+                        <label for="price" class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">
+                            Prix (MAD) <span class="text-cyan-400">*</span>
+                        </label>
+                        <div class="relative">
+                            <i data-lucide="banknote" class="w-4 h-4 text-gray-500 absolute left-4 top-1/2 -translate-y-1/2"></i>
+                            <input 
+                                type="number" 
+                                id="price" 
+                                name="price" 
+                                min="0" 
+                                step="0.01" 
+                                placeholder="0" 
+                                class="w-full pl-11 pr-16 py-3 rounded-xl bg-black/40 border border-white/10 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all" 
+                                required 
+                            />
+                            <span class="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-cyan-400">DH</span>
+                        </div>
+                        <p class="mt-1.5 text-[11px] text-gray-500">Mettre 0 pour un accès gratuit.</p>
+                    </div>
+
+                    <!-- Capacité -->
+                    <div>
+                        <label for="capacity" class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">
+                            Capacité Max <span class="text-cyan-400">*</span>
+                        </label>
+                        <div class="relative">
+                            <i data-lucide="users" class="w-4 h-4 text-gray-500 absolute left-4 top-1/2 -translate-y-1/2"></i>
+                            <input 
+                                type="number" 
+                                id="capacity" 
+                                name="capacity" 
+                                min="1" 
+                                placeholder="150" 
+                                class="w-full pl-11 pr-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all" 
+                                required 
+                            />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="pt-6 border-t border-white/10 flex flex-col-reverse sm:flex-row items-center justify-end gap-3">
+                <a 
+                    href="{{ route('admin.events') }}" 
+                    class="w-full sm:w-auto px-6 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 text-sm font-semibold transition-all text-center"
+                >
+                    Annuler
+                </a>
+                <button 
+                    type="submit" 
+                    class="w-full sm:w-auto px-6 py-3 rounded-xl gradient-btn text-white text-sm font-bold shadow-neon hover:opacity-90 transition-all flex items-center justify-center gap-2"
+                >
+                    <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                    Publier l'événement
+                </button>
+            </div>
+
+        </form>
+
     </div>
-  </div>
 
-</body>
+</div>
 
-</html>
+@endsection
