@@ -28,6 +28,8 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/admin/events/{event}', [EventController::class, 'update'])
             ->name('events.update');
 
+        Route::delete('/admin/events/{event}', [EventController::class, 'destroy'])
+            ->name('events.destroy');
     });
 
 
