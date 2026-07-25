@@ -48,7 +48,7 @@
 
             <!-- Actions / Profile / Admin Link -->
             <div class="flex items-center gap-4">
-                <!-- Lien visible uniquement si Admin (Protection par Middleware/Role côté Backend) -->
+                <!-- Lien visible uniquement si Admin -->
                 <a href="/admin/events" class="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 hover:bg-indigo-500/20 transition-all">
                     <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
                     Espace Admin
@@ -62,7 +62,7 @@
     </nav>
 
     <!-- 2. HERO SECTION -->
-    <header class="relative overflow-hidden  border-b border-zinc-800/50">
+    <header class="relative overflow-hidden border-b border-zinc-800/50">
         <!-- Effet Glow en arrière-plan -->
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-brand-neon/10 blur-[120px] rounded-full pointer-events-none"></div>
         <div class="absolute top-1/3 right-1/4 w-[400px] h-[200px] bg-brand-accent/10 blur-[100px] rounded-full pointer-events-none"></div>
@@ -79,7 +79,7 @@
             </h1>
 
             <p class="mt-6 text-lg sm:text-xl text-zinc-400 max-w-2xl mx-auto leading-relaxed">
-                Rerve ta place en un clic, obtiens ton Pass numérique unique et vis l'expérience campus à 100%.
+                Réserve ta place en un clic, obtiens ton Pass numérique unique et vis l'expérience campus à 100%.
             </p>
 
             <!-- Search & Filters Bar -->
@@ -117,127 +117,78 @@
         <!-- Grid Cards -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-            <!-- EVENT CARD 1: Disponible (Gratuit) -->
-            <div class="bg-brand-card border border-zinc-800/80 rounded-2xl overflow-hidden hover:border-brand-neon/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(52,211,153,0.1)] flex flex-col group">
-                
-                <!-- Image Header -->
-                <div class="relative h-48 bg-zinc-800 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80" alt="Event" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent"></div>
-                    
-                    <!-- Price Tag -->
-                    <span class="absolute top-4 right-4 bg-brand-neon text-brand-dark text-xs font-black px-3 py-1.0 rounded-full uppercase tracking-wider">
-                        Gratuit
-                    </span>
-
-                    <!-- Places Badge -->
-                    <span class="absolute bottom-4 left-4 bg-zinc-950/80 backdrop-blur-md text-emerald-400 border border-emerald-500/20 text-xs font-mono px-2.5 py-1 rounded-lg">
-                        ⚡ 42 places restantes
-                    </span>
-                </div>
-
-                <!-- Content -->
-                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-                    <div>
-                        <div class="text-xs font-semibold text-brand-neon uppercase tracking-wider mb-1">Soirée BDE</div>
-                        <h3 class="text-xl font-bold text-white group-hover:text-brand-neon transition-colors">Welcome Party 2026</h3>
-                        <p class="text-zinc-400 text-sm mt-2 line-clamp-2">
-                            La grande soirée d'intégration du campus. DJ sets, animations et surprises tout au long de la nuit.
-                        </p>
-                    </div>
-
-                    <!-- Event Details -->
-                    <div class="space-y-2 text-xs text-zinc-400 border-t border-zinc-800/60 pt-4">
-                        <div class="flex items-center gap-2">
-                            <svg class="w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                            <span>Vendredi 25 Oct • 21:00</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <svg class="w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                            <span>Grand Hall Campus</span>
-                        </div>
-                    </div>
-
-                    <!-- Action Button (US 2.1) -->
-                    <button class="w-full py-3 rounded-xl bg-brand-neon text-brand-dark font-extrabold text-sm hover:shadow-[0_0_15px_rgba(52,211,153,0.3)] transition-all">
-                        S'inscrire en 1 Clic
-                    </button>
-                </div>
-            </div>
-
-            <!-- EVENT CARD 2: Presque complet (Alerte Visuelle) -->
+            @foreach($events as $event)
             <div class="bg-brand-card border border-zinc-800/80 rounded-2xl overflow-hidden hover:border-amber-500/40 transition-all duration-300 flex flex-col group">
+
+                <!-- IMAGE -->
                 <div class="relative h-48 bg-zinc-800 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80" alt="Event" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <img 
+                        src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80"
+                        alt="Event"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    >
                     <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent"></div>
-                    
+
+                    <!-- PRICE -->
                     <span class="absolute top-4 right-4 bg-brand-neon text-brand-dark text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider">
-                        Gratuit
+                        @if($event->price == 0)
+                            Gratuit
+                        @else
+                            {{ $event->price }} DH
+                        @endif
                     </span>
 
-                    <span class="absolute bottom-4 left-4 bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono px-2.5 py-1 rounded-lg animate-pulse">
-                        🔥 Seulement 3 places !
-                    </span>
+                    @if($event->capacity <= 5)
+                        <span class="absolute bottom-4 left-4 bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono px-2.5 py-1 rounded-lg animate-pulse">
+                            🔥 Seulement {{ $event->capacity }} places !
+                        </span>
+                    @endif
                 </div>
 
+                <!-- CONTENT -->
                 <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
                     <div>
-                        <div class="text-xs font-semibold text-amber-400 uppercase tracking-wider mb-1">Gaming</div>
-                        <h3 class="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">Tournoi LAN FIFA & Valorant</h3>
+                        <!-- CATEGORY -->
+                        <div class="text-xs font-semibold text-amber-400 uppercase tracking-wider mb-1">
+                            {{ $event->category }}
+                        </div>
+
+                        <!-- TITLE -->
+                        <h3 class="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">
+                            {{ $event->title }}
+                        </h3>
+
+                        <!-- DESCRIPTION -->
                         <p class="text-zinc-400 text-sm mt-2 line-clamp-2">
-                            Affronte les meilleurs joueurs de l'école. Cashprize et lots à gagner pour les finalistes.
+                            {{ $event->description }}
                         </p>
                     </div>
 
+                    <!-- INFO -->
                     <div class="space-y-2 text-xs text-zinc-400 border-t border-zinc-800/60 pt-4">
                         <div class="flex items-center gap-2">
-                            <svg class="w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                            <span>Mardi 29 Oct • 18:00</span>
+                            <svg class="w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                            <span>{{ $event->date_event }}</span>
                         </div>
+
                         <div class="flex items-center gap-2">
-                            <svg class="w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                            <span>Salle Informatique B2</span>
+                            <svg class="w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                            </svg>
+                            <span>{{ $event->location }}</span>
                         </div>
                     </div>
 
-                    <button class="w-full py-3 rounded-xl bg-amber-500 text-zinc-950 font-extrabold text-sm hover:bg-amber-400 transition-all">
-                        S'inscrire d'urgence
-                    </button>
+                    <!-- BUTTON -->
+                    <a href="#" class="w-full text-center py-3 rounded-xl bg-amber-500 text-zinc-950 font-extrabold text-sm hover:bg-amber-400 transition-all">
+                        S'inscrire
+                    </a>
                 </div>
+
             </div>
-
-            <!-- EVENT CARD 3: Complet (Bouton Désactivé) -->
-            <div class="bg-brand-card border border-zinc-800/50 rounded-2xl overflow-hidden opacity-75 flex flex-col">
-                <div class="relative h-48 bg-zinc-800 overflow-hidden grayscale">
-                    <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=800&q=80" alt="Event" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent"></div>
-                    
-                    <span class="absolute top-4 right-4 bg-rose-500/20 border border-rose-500/30 text-rose-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                        Complet
-                    </span>
-                </div>
-
-                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-                    <div>
-                        <div class="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-1">Conférence</div>
-                        <h3 class="text-xl font-bold text-zinc-300">Masterclass AI & Web3</h3>
-                        <p class="text-zinc-500 text-sm mt-2 line-clamp-2">
-                            Une immersion complète dans le futur du développement web avec des experts de l'industrie.
-                        </p>
-                    </div>
-
-                    <div class="space-y-2 text-xs text-zinc-500 border-t border-zinc-800/60 pt-4">
-                        <div class="flex items-center gap-2">
-                            <svg class="w-4 h-4 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                            <span>Jeudi 05 Nov • 14:00</span>
-                        </div>
-                    </div>
-
-                    <button disabled class="w-full py-3 rounded-xl bg-zinc-800 text-zinc-500 font-bold text-sm cursor-not-allowed">
-                        Victime de son succès (Complet)
-                    </button>
-                </div>
-            </div>
+            @endforeach
 
         </div>
     </main>

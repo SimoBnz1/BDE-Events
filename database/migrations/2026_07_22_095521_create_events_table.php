@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('location');
+            $table->date('date_event');
             $table->decimal('price',6,2)->default(0.00);
             $table->integer('capacity');
             $table->enum('category', ['soiree', 'sport', 'culture', 'workshop', 'conference'])->default('culture');

@@ -43,6 +43,7 @@ class ReservationController extends Controller
             'ticket_code' => 'TICK-' . strtoupper(Str::random(8)),
             'is_used' => false,
         ]);
+        return back()->with("messg","reservation effucter avec succes");
     }
 
     public function destroy(Reservation $reservation)

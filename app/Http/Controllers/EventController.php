@@ -12,7 +12,10 @@ class EventController extends Controller
         $events=Event::where('status','published')
                 ->orderBy('date_event','asc')
                 ->get();
-        return view('events.index',compact($events));
+        return view('index', compact('events'));
+    }
+    public function formEvenment(){
+        return view('admin.components.addEvents');
     }
 
     public function show(Event $event){
@@ -32,6 +35,6 @@ class EventController extends Controller
         $validatedData['user_id'] = Auth::id();
         $validatedData['status'] = 'published';
         Event::create($validatedData);
-        return redirect()->route('events.index')->with('success', 'Event créé avec succès!');
+        return redirect()->route('admin.dashboard')->with('success', 'Event créé avec succès!');
     }
 }
