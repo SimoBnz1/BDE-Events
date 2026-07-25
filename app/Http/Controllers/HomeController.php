@@ -48,6 +48,7 @@ class HomeController extends Controller
     {
         $events = Event::latest()->get();
 
+        
         return view('admin.components.events-table', compact('events'));
     }
     public function eventsStudent()

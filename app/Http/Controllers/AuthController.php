@@ -31,8 +31,6 @@ class AuthController extends Controller
         return redirect()->back()->with('error', 'email ou mot de pass incorrect');
     }
 
-
-
     public function logout(Request $request)
     {
         Auth::logout();
