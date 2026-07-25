@@ -21,6 +21,7 @@
         </p>
     </div>
 
+    
     <div class="flex items-center gap-3">
         <a href="{{ route('creatEvenment') }}"
            class="inline-flex items-center gap-2 gradient-btn text-white px-5 py-3 rounded-xl font-bold text-sm hover:opacity-90 transition-all shadow-md transform hover:-translate-y-0.5">

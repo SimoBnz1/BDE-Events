@@ -51,6 +51,7 @@
             <p class="text-xs text-cyan-400 font-semibold uppercase tracking-wider">
                 {{ Auth::user()->role }}
             </p>
+            
             <p class="font-bold text-sm text-white truncate">
                 {{ Auth::user()->name }}
             </p>

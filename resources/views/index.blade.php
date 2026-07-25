@@ -230,9 +230,11 @@
                             <i data-lucide="map-pin" class="w-4 h-4 text-cyan-400"></i>
                             <span>{{ $event->location }}</span>
                         </div>
+                        
                     </div>
 
                     <!-- BUTTON -->
+
                     <a href="{{ route('login')}}" class="w-full text-center py-3 rounded-xl gradient-btn text-white font-extrabold text-sm hover:opacity-90 transition-all shadow-md">
                         S'inscrire
                     </a>
