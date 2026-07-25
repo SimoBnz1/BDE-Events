@@ -73,4 +73,11 @@ public function update(Request $request, Event $event)
         ->with('success','Evénement modifié avec succès.');
 }
 
+public function destroy(Event $event)
+{
+    $event->delete();
+
+    return redirect()->route('admin.events')
+        ->with('success','Evénement supprimé avec succès.');
+}
 }
