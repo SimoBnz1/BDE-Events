@@ -42,6 +42,7 @@ class HomeController extends Controller
             )
         );
     }
+    
 
     public function events()
     {

@@ -37,6 +37,7 @@ class ReservationController extends Controller
             'event_id' => $event->id,
             'status' => 'confirmed'
         ]);
+        
 
         Ticket::create([
             'reservation_id' => $reservation->id,
