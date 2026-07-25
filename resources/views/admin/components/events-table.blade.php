@@ -59,7 +59,7 @@
 
                     <th>Catégorie</th>
 
-                    <th>Status</th>
+                    <th>Action</th>
 
                 </tr>
 
@@ -113,27 +113,35 @@
 
                     <td>
 
-                        @if($event->status=='published')
+                        <div class="flex gap-2">
 
-                            <span class="bg-emerald-400/10 text-emerald-400 px-3 py-1 rounded-full text-xs">
-                                Publié
-                            </span>
+                            <a href="{{ route('events.edit',$event->id) }}"
+                                class="px-3 py-2 rounded-lg bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 transition">
 
-                        @elseif($event->status=='draft')
+                                Modifier
 
-                            <span class="bg-yellow-400/10 text-yellow-400 px-3 py-1 rounded-full text-xs">
-                                Draft
-                            </span>
+                            </a>
 
-                        @else
+                            <form action="{{ route('events.destroy',$event->id) }}" method="POST">
 
-                            <span class="bg-red-400/10 text-red-400 px-3 py-1 rounded-full text-xs">
-                                Cancelled
-                            </span>
+                                @csrf
+                                @method('DELETE')
 
-                        @endif
+                                <button
+                                    onclick="return confirm('Supprimer cet événement ?')"
+                                    class="px-3 py-2 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 transition">
+
+                                    Supprimer
+
+                                </button>
+
+                            </form>
+
+                        </div>
 
                     </td>
+
+
 
                 </tr>
 
