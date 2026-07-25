@@ -15,6 +15,7 @@
 
         </a>
         
+        
         <a href="{{ route('admin.events') }}"
             class="flex items-center gap-3 text-zinc-400 hover:text-white px-4 py-3 rounded-xl transition">
             <i data-lucide="calendar"></i>

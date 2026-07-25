@@ -4,7 +4,6 @@
 
 @section('content')
 
-<!-- HEADER -->
 <div class="flex justify-between items-center mb-10">
 
     <div>
@@ -23,7 +22,7 @@
 
 </div>
 
-<!-- TABLE CARD -->
+
 <div class="bg-card border border-zinc-800 rounded-2xl p-6">
 
     <div class="flex justify-between items-center mb-6">
