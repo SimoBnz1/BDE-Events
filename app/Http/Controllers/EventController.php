@@ -50,4 +50,27 @@ class EventController extends Controller
 
         return view('index', compact('events'));
     }
+    public function edit(Event $event)
+{
+    return view('admin.components.editEvent', compact('event'));
+}
+
+public function update(Request $request, Event $event)
+{
+    $validated = $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'required|string',
+        'date_event' => 'required|date',
+        'location' => 'required|string|max:255',
+        'price' => 'required|numeric|min:0',
+        'capacity' => 'required|integer|min:1',
+        'category' => 'required|in:soiree,sport,culture,workshop,conference',
+    ]);
+
+    $event->update($validated);
+
+    return redirect()->route('admin.events')
+        ->with('success','Evénement modifié avec succès.');
+}
+
 }
