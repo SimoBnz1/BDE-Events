@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+    public function Events(Event $event){
+        $total=Event::count('reservations')->get();
+        $rest=$event->capacity-$total;
+        $events=Event::with('reservations')
+                    ->select('title')
+                    ->get();
+        dd([$rest,$events]);
+    }
     public function index()
     {
         return view('index');
@@ -48,7 +56,7 @@ class HomeController extends Controller
     {
         $events = Event::latest()->get();
 
-        
+
         return view('admin.components.events-table', compact('events'));
     }
     public function eventsStudent()

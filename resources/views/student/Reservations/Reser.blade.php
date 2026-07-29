@@ -34,7 +34,7 @@
                     Confirmée
                 </span>
                 <span class="text-xs font-mono text-gray-500">
-                    #{{ $reservation->id ?? 'PASS' }}
+                    {{ $reservation->id ?? 'PASS' }}
                 </span>
             </div>
 

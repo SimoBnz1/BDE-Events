@@ -16,7 +16,7 @@ Route::get('/events/category/{category}', [EventController::class, 'filter'])
 
 Route::middleware(['auth'])->group(function () {
     Route::middleware(['is_admin'])->group(function () {
-        Route::get('/admin/dashboard', [HomeController::class, 'dashboard'])->name('admin.dashboard');
+        Route::get('/admin/dashboard', [HomeController::class, 'Events'])->name('admin.dashboard');
         Route::get('/admin/events', [HomeController::class, 'eventsAdmin'])->name('admin.events');
         Route::get('/admin/reservations', [HomeController::class, 'reservations'])->name('admin.reservations');
         Route::get('/formEvenment', [EventController::class, 'formEvenment'])->name('creatEvenment');

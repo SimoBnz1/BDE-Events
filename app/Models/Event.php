@@ -28,4 +28,6 @@ class Event extends Model
     {
         return $this->hasMany(Reservation::class);
     }
+
+    
 }
